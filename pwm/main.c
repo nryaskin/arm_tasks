@@ -58,10 +58,7 @@ void Init_Timer(void){
     //TIM_ITConfig(TIM1, TIM_IT_Update, ENABLE);
 }
 
-
-
-int main(void)
-{
+void Init_Leds(void){
   GPIO_InitTypeDef  GPIO_InitStructure;
 
 
@@ -77,10 +74,14 @@ int main(void)
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
   GPIO_Init(GPIOA, &GPIO_InitStructure);
 
+}
+
+int main(void)
+{
 
   Init_Timer();
   TM_PWM_Init();
-
+  Init_Leds();
   //GPIO_SetBits(GPIOA, L_PINS);
    
   //GPIO_ResetBits(GPIOA, active_LED);
