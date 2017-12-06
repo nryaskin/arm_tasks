@@ -6,6 +6,8 @@
 #define LED3_PIN GPIO_Pin_14
 #define LED4_PIN GPIO_Pin_15
 
+#define L_INDICATORS (LED1_PIN) | (LED2_PIN) | (LED3_PIN) 
+
 #define L_PIN_R GPIO_Pin_8
 #define L_PIN_G GPIO_Pin_9
 #define L_PIN_B GPIO_Pin_10
@@ -30,6 +32,8 @@
 int turn_off;
 int j, levels;
 uint16_t active_LED = GPIO_PinSource10;
+
+uint16_t indicators[] = { LED1_PIN, LED2_PIN, LED3_PIN };
 
 typedef void (*compare)(TIM_TypeDef*, uint32_t);
 
@@ -62,6 +66,23 @@ void TM_PWM_Init(void){
     //TIM_SetCompare1(TIM1, 10);
     TIM_Cmd(TIM1, ENABLE);
 
+}
+
+void Init_Indicators(void){
+    GPIO_InitTypeDef  GPIO_InitStructure;
+
+
+    /* Enable peripheral clock for GPIOA port */
+    RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);
+    GPIO_InitStructure.GPIO_Pin = LED1_PIN | LED2_PIN | LED3_PIN; 
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
+    GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
+    GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
+    GPIO_Init(GPIOA, &GPIO_InitStructure);
+
+    GPIO_ResetBits(GPIOA, L_INDICATORS); 
+    GPIO_SetBits(GPIOA, indicators[j]);
 }
 
 void Init_Timer(void){
@@ -150,7 +171,9 @@ void change_color(int order){
 
     comp_arr[j](TIM1, PULSE - 1);
     levels = 0;
+    GPIO_ResetBits(GPIOD, indicators[j]); 
     j = (j + order + COUNT) % COUNT;
+    GPIO_SetBits(GPIOD, indicators[j]); 
 
 }
 
@@ -180,7 +203,7 @@ int main(void)
     //Init_Led_Red();
     Init_Leds();
     Init_Buttons();
-
+    Init_Indicators();
     //GPIO_SetBits(GPIOA, L_PINS);
     //GPIO_ResetBits(GPIOA, active_LED);
 
