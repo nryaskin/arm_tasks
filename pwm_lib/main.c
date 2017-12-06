@@ -18,7 +18,7 @@
 #define PWM_FREQ 60
 #define PRESCALER 1680
 #define PERIOD (MAX_FREQ)/((PRESCALER) * (PWM_FREQ))
-#define PULSE (PERIOD)*(0.05)
+#define PULSE 1
 
 //168000000/1680 = 100000
 #define L_PINS (GPIO_Pin_8) | (GPIO_Pin_9) | (GPIO_Pin_10)
@@ -30,6 +30,10 @@
 int turn_off;
 int j, levels;
 uint16_t active_LED = GPIO_PinSource10;
+
+typedef void (*compare)(TIM_TypeDef*, uint32_t);
+
+compare comp_arr[] = {TIM_SetCompare1, TIM_SetCompare2, TIM_SetCompare3};
 
 void TM_PWM_Init(void){
     TIM_OCInitTypeDef TIM_OCStruct;
@@ -139,9 +143,16 @@ void change_intensity(int order){
 
     levels = (levels + order + INTESITI_LEVELS) % INTESITI_LEVELS;
 
-    TIM_SetCompare1(TIM1, PERIOD * ((float)levels * 0.1));
+    comp_arr[j](TIM1, PERIOD * ((float)levels * 0.1));
 }
 
+void change_color(int order){
+
+    comp_arr[j](TIM1, PULSE - 1);
+    levels = 0;
+    j = (j + order + COUNT) % COUNT;
+
+}
 
 
 void EXTI0_IRQHandler(void){
@@ -153,7 +164,7 @@ void EXTI0_IRQHandler(void){
 
 void EXTI1_IRQHandler(void){
      if(EXTI_GetITStatus(EXTI_Line1) != RESET) {
-
+         change_color(1);
       EXTI_ClearITPendingBit(EXTI_Line1);
     }
 }
