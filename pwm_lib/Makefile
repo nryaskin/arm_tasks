@@ -1,4 +1,3 @@
-##
 ## This file is part of the libopencm3 project.
 ##
 ## Copyright (C) 2009 Uwe Hermann <uwe@hermann-uwe.de>
@@ -22,5 +21,10 @@ all: images
 BUILD_HOME=../..
 
 BINARY = main
+LDLIBS += $(BUILD_HOME)/lib/pwm_lib.a
+library: lib
+	cp pwm_lib.a $(BUILD_HOME)/lib
+lib: pwm_lib.o
+	$(Q)$(AR) rcs -o pwm_lib.a -c pwm_lib.o
 
 include $(BUILD_HOME)/src/Makefile.include
