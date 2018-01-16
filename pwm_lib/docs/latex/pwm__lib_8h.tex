@@ -1,0 +1,57 @@
+\hypertarget{pwm__lib_8h}{}\section{pwm\+\_\+lib.\+h File Reference}
+\label{pwm__lib_8h}\index{pwm\+\_\+lib.\+h@{pwm\+\_\+lib.\+h}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{pwm__lib_8h_ac7375865a28e4dda72ca86f6c12baf82}{Init\+Lib}} (void)
+\begin{DoxyCompactList}\small\item\em A pwm library functions. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{pwm__lib_8h_a3a4700d76690200fabb3b552e9ee90e2}{change\+\_\+color}} (int)
+\begin{DoxyCompactList}\small\item\em Switch color. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{pwm__lib_8h_a8aadceaaf03fecfe8585935e7b2d4bb6}{change\+\_\+intensity}} (int)
+\begin{DoxyCompactList}\small\item\em Change color intensity. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{pwm__lib_8h_a3a4700d76690200fabb3b552e9ee90e2}\label{pwm__lib_8h_a3a4700d76690200fabb3b552e9ee90e2}} 
+\index{pwm\+\_\+lib.\+h@{pwm\+\_\+lib.\+h}!change\+\_\+color@{change\+\_\+color}}
+\index{change\+\_\+color@{change\+\_\+color}!pwm\+\_\+lib.\+h@{pwm\+\_\+lib.\+h}}
+\subsubsection{\texorpdfstring{change\+\_\+color()}{change\_color()}}
+{\footnotesize\ttfamily void change\+\_\+color (\begin{DoxyParamCaption}\item[{int}]{ }\end{DoxyParamCaption})}
+
+
+
+Switch color. 
+
+Function switchs active leds. 
+\begin{DoxyParams}{Parameters}
+{\em order} & Takes 1 or -\/1 to change colors forward or backwards. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{pwm__lib_8h_a8aadceaaf03fecfe8585935e7b2d4bb6}\label{pwm__lib_8h_a8aadceaaf03fecfe8585935e7b2d4bb6}} 
+\index{pwm\+\_\+lib.\+h@{pwm\+\_\+lib.\+h}!change\+\_\+intensity@{change\+\_\+intensity}}
+\index{change\+\_\+intensity@{change\+\_\+intensity}!pwm\+\_\+lib.\+h@{pwm\+\_\+lib.\+h}}
+\subsubsection{\texorpdfstring{change\+\_\+intensity()}{change\_intensity()}}
+{\footnotesize\ttfamily void change\+\_\+intensity (\begin{DoxyParamCaption}\item[{int}]{ }\end{DoxyParamCaption})}
+
+
+
+Change color intensity. 
+
+Changing color intensity forward if order $>$ 0 and backwards if $<$ 0. 
+\begin{DoxyParams}{Parameters}
+{\em order} & Takes 1 or -\/1. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{pwm__lib_8h_ac7375865a28e4dda72ca86f6c12baf82}\label{pwm__lib_8h_ac7375865a28e4dda72ca86f6c12baf82}} 
+\index{pwm\+\_\+lib.\+h@{pwm\+\_\+lib.\+h}!Init\+Lib@{Init\+Lib}}
+\index{Init\+Lib@{Init\+Lib}!pwm\+\_\+lib.\+h@{pwm\+\_\+lib.\+h}}
+\subsubsection{\texorpdfstring{Init\+Lib()}{InitLib()}}
+{\footnotesize\ttfamily void Init\+Lib (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+A pwm library functions. 
+
+functions to allow pwm.\+Initialization.
+
+A function that you use for initing Timers and leds. 
